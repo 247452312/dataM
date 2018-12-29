@@ -1,6 +1,7 @@
 package com.uhyils.core;
 
 import com.uhyils.core.key.DataToKey;
+import com.uhyils.entity.Data;
 import com.uhyils.enums.DefectDataDealType;
 
 import java.util.HashMap;
@@ -22,7 +23,7 @@ public interface DataPreprocessing {
      * @param colDealTypes 部分行数据缺失处理方法(优先级较高)
      * @return 处理完成的数据(如果原始数据带有title, 则这里也有, 如果没有, 这里也没有)
      */
-    List<List<Object>> dealMissingData(List<List<Object>> data, DefectDataDealType allDealType, HashMap<Integer, DefectDataDealType> colDealTypes);
+    void dealMissingData(Data data, DefectDataDealType allDealType, HashMap<Integer, DefectDataDealType> colDealTypes);
 
     /**
      * 异常值-数据预处理
@@ -31,7 +32,7 @@ public interface DataPreprocessing {
      * @param outliersColRules 可能出现异常值的列的处理方式
      * @return
      */
-    List<List<Object>> dealOutliersData(List<List<Object>> data, HashMap<Object, OutliersRule> outliersColRules);
+    void dealOutliersData(Data data, HashMap<Object, OutliersRule> outliersColRules) throws Exception;
 
     /**
      * 离群值-数据预处理
@@ -40,7 +41,7 @@ public interface DataPreprocessing {
      * @param noOutliersCol 不可能出现离群点的列(可以是Integer 也可以是String)
      * @return
      */
-    List<List<Object>> dealOutliersData(List<List<Object>> data, List<Object> noOutliersCol);
+    void dealOutliersData(Data data, List<Object> noOutliersCol) throws Exception;
 
     /**
      * 检测与删除重复数据
@@ -48,7 +49,7 @@ public interface DataPreprocessing {
      * @param data
      * @return
      */
-    List<List<Object>> dealDuplicateData(List<List<Object>> data, HashMap<Object, DataToKey> key);
+    void dealDuplicateData(Data data, HashMap<Object, DataToKey> key);
 
     /**
      * 类型转换-数据预处理
@@ -56,7 +57,7 @@ public interface DataPreprocessing {
      * @param data
      * @return
      */
-    List<List<Object>> dealDataType(List<List<Object>> data, HashMap<Object, DataTypeConverter> converters);
+    void dealDataType(Data data, HashMap<Object, DataTypeConverter> converters);
 
     /**
      * 采样-获取边缘点
@@ -64,7 +65,7 @@ public interface DataPreprocessing {
      * @param data
      * @return
      */
-    List<List<Object>> samplingEdgePoint(List<List<Object>> data);
+    void samplingEdgePoint(Data data);
 
     /**
      * 采样-平衡某列的值使他们趋近于平衡
@@ -73,7 +74,7 @@ public interface DataPreprocessing {
      * @param col
      * @return
      */
-    List<List<Object>> samplingbalance(List<List<Object>> data, List<Object> col);
+    void samplingbalance(Data data, List<Object> col);
 
     /**
      * 数据标准化
@@ -89,7 +90,7 @@ public interface DataPreprocessing {
      * @param gaussCol        高斯数据列
      * @return
      */
-    List<List<Object>> dataNormalization(List<List<Object>> data, List<Object> noNormalization, List<Object> gaussCol);
+    void dataNormalization(Data data, List<Object> noNormalization, List<Object> gaussCol);
 
     /**
      * 主成分分析(PCA)
@@ -99,7 +100,7 @@ public interface DataPreprocessing {
      * @param noAttribute 不能当做属性的列
      * @return
      */
-    List<List<Object>> dealOfPCA(List<List<Object>> data, Object resultCol, List<Object> noAttribute);
+    void dealOfPCA(Data data, Object resultCol, List<Object> noAttribute);
 
 
 }
