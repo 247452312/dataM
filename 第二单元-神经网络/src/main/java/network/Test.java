@@ -1,6 +1,6 @@
 package network;
 
-import formula.FormulaE;
+import formula.FormulaS;
 import formula.FormulaU;
 import network.entity.NeuralNetwork;
 
@@ -16,7 +16,7 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
 
-        NeuralNetwork neuralNetwork = NeuralNetwork.structureNeuralNetwork(new FormulaU(), 1, 3, 0.01, new FormulaE(), new FormulaU());
+        NeuralNetwork neuralNetwork = NeuralNetwork.structureNeuralNetwork(new FormulaU(), 1, 3, 0.01, new FormulaS(), new FormulaU());
 
         //初始化数据集
         List<List<Double>> list = new ArrayList<List<Double>>();

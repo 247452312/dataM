@@ -1,6 +1,8 @@
 package formula;
 
 /**
+ * 公式 Y = (e^x - e^-x) / (e^x + e^-x)
+ *
  * @author uhyils <247452312@qq.com>
  * @date 文件创建日期 2019年01月05日 18时46分
  */
@@ -17,6 +19,7 @@ public class FormulaT implements Formula {
     }
 
     public Double inverseOperation(Double out) {
+        //TODO 算不出来
         return null;
     }
 }

@@ -1,12 +1,12 @@
 package formula;
 
 /**
- * 公式:
+ * 公式: Y = 1 / (1 + e^-x)
  *
  * @author uhyils <247452312@qq.com>
  * @date 文件创建日期 2019年01月05日 11时16分
  */
-public class FormulaE implements Formula {
+public class FormulaS implements Formula {
 
     public Double getResult(Double doubles) {
         double k = Math.pow(Math.E, -doubles);

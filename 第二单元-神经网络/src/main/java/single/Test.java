@@ -1,7 +1,7 @@
 package single;
 
 import formula.Formula;
-import formula.FormulaE;
+import formula.FormulaS;
 import single.entity.Neuron;
 
 import java.math.BigDecimal;
@@ -24,7 +24,7 @@ public class Test {
 
 
         //创建神经网络节点, 激励函数为Y=1 / (1 + E^x)  学习率为0.01
-        Formula formula = new FormulaE();
+        Formula formula = new FormulaS();
         Neuron neuron = new Neuron(weight, formula, new Double(0.1));
 
         //初始化数据集
