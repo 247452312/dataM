@@ -106,7 +106,7 @@ public class Neuron {
         //以下4个变量都是记录学习进度的
         Long startTime = System.currentTimeMillis();
         /*↓↓↓↓↓将总数据集分为k份*/
-        int k = 10;
+        int k = 4;
         int size = doubles.size();
         int mark = 0;
 
