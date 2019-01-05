@@ -1,5 +1,4 @@
-package single.entity;
-
+package network.entity.neuron;
 
 import formula.Formula;
 
@@ -103,7 +102,7 @@ public class Neuron {
             throw new Exception("期望数量和数据集数量不相等");
         }
 
-        //以下4个变量都是记录学习进度的
+        //以下5个变量都是记录学习进度的
         Long startTime = System.currentTimeMillis();
         /*↓↓↓↓↓将总数据集分为k份*/
         int k = 10;
@@ -112,15 +111,12 @@ public class Neuron {
 
         for (int i = 0; i < doubles.size(); i++) {
             List<Double> doubles1 = doubles.get(i);
-            //实际输出
             Double out = getOut(doubles1);
-            //误差
             Double difference = want.get(i) - out;
-            //第一个权重修正为 W0 = W0 + (期望输出 - 实际输出) * 学习率 * 公式(实际输出) * 1
-            weights.set(0, weights.get(0) + difference * learnRate * formula.getDerivatives(out) * 1.0);
+            Double multiply = difference * learnRate;
+            weights.set(0, weights.get(0) + (multiply * 1.0));
             for (int j = 1; j < weights.size(); j++) {
-                //其他的权重修正为 Wa = Wa + (期望输出 - 实际输出) * 学习率 * 公式(实际输出) * X(a-1)
-                weights.set(j, weights.get(j) + difference * learnRate * formula.getDerivatives(out) * doubles1.get(j - 1));
+                weights.set(j, weights.get(j) + (multiply * doubles1.get(j - 1)));
             }
             if (i % (size / k) == 0) {
                 System.out.println("学习进度:" + (mark++ / (k * 1.0)) * 100.0 + "%");
