@@ -2,9 +2,7 @@ package com.uhyils.entity;
 
 import com.uhyils.util.DataTitleUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 数据集
@@ -50,6 +48,47 @@ public class Data {
             this.data = data;
         }
 
+
+        HashMap<Integer, Integer> colCount = new HashMap<>();
+        for (List<Object> datum : this.data) {
+            if (colCount.keySet().contains(datum.size())) {
+                colCount.put(datum.size(), colCount.get(datum.size()) + 1);
+            } else {
+                colCount.put(datum.size(), 1);
+            }
+        }
+        if (colCount.size() > 1) {
+            //多少列
+            int max = 0;
+            //出现的次数
+            int count = 0;
+            for (Map.Entry<Integer, Integer> entry : colCount.entrySet()) {
+                if (entry.getValue() > count) {
+                    count = entry.getValue();
+                    max = entry.getKey();
+                }
+            }
+
+            for (int i = 0; i < this.data.size(); i++) {
+                List<Object> list = this.data.get(i);
+                if (list.size() > max) {
+                    List<Object> listTemp = new ArrayList<>();
+                    for (int j = 0; j < max; j++) {
+                        listTemp.add(list.get(j));
+                    }
+                    this.data.set(i, listTemp);
+                } else if (list.size() < max) {
+                    List<Object> listTemp = new ArrayList<>();
+                    for (int j = 0; j < list.size(); j++) {
+                        listTemp.add(list.get(j));
+                    }
+                    for (int j = list.size(); j < max; j++) {
+                        listTemp.add(null);
+                    }
+                    this.data.set(i, listTemp);
+                }
+            }
+        }
     }
 
     public Data(boolean haveTitle, List<List<Object>> data, List<Object> title) {

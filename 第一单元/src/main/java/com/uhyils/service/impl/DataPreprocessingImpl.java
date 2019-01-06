@@ -32,10 +32,14 @@ public class DataPreprocessingImpl implements DataPreprocessing {
         for (int i = 0; i < listData.size(); i++) {
             for (int j = 0; j < listData.get(0).size(); j++) {
                 if (listData.get(i).get(j) == null || listData.get(i).get(j) instanceof String && ((String) listData.get(i).get(j)).isEmpty()) {
-                    if (colDealTypes.get(j) != null) {
-                        listData.get(i).set(j, getMissing(listData, i, j, colDealTypes.get(j)));
+                    if (colDealTypes != null && colDealTypes.get(j) != null) {
+                        Object missing = getMissing(listData, i, j, colDealTypes.get(j));
+                        listData.get(i).set(j, missing);
+                        System.out.println("第" + j + "个数据 为空,填充为" + missing);
                     } else {
-                        listData.get(i).set(j, getMissing(listData, i, j, allDealType));
+                        Object missing = getMissing(listData, i, j, allDealType);
+                        listData.get(i).set(j, missing);
+                        System.out.println("第" + (i + 1) + "行" + (j + 1) + "个数据 为空,填充为" + missing);
                     }
                 }
             }
@@ -59,8 +63,10 @@ public class DataPreprocessingImpl implements DataPreprocessing {
                         continue;
                     }
                     Object o = listData.get(a).get(j);
-                    sum += (double) o;
-                    count++;
+                    if (o != null) {
+                        sum += (double) o;
+                        count++;
+                    }
                 }
                 return sum / count;
             default:
