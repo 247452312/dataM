@@ -69,6 +69,8 @@ public class DataPreprocessingImpl implements DataPreprocessing {
                     }
                 }
                 return sum / count;
+            case FILL_MODE_NUM:
+                return null;
             default:
                 return null;
         }
@@ -142,6 +144,8 @@ public class DataPreprocessingImpl implements DataPreprocessing {
             if (noOutliersColInt.contains(i)) {
                 continue;
             }
+            //TODO 离群值处理
+
         }
     }
 

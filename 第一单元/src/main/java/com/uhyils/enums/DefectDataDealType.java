@@ -10,7 +10,8 @@ public enum DefectDataDealType {
     DELETE_DATA("删除数据行", 1),
     FILL_ACERAGE("填充均值", 2),
     FILL_SIMILAR_ACERAGE("填充局部均值", 3),
-    NOT_TO_DEAL("不作处理", 4);
+    NOT_TO_DEAL("不作处理", 4),
+    FILL_MODE_NUM("填充众数",5);
 
     private String name;
     private Integer type;
